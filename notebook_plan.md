@@ -224,7 +224,7 @@ data/wikipedia_id_corpus.jsonl      # retrieval corpus untuk NB07 (Δgap) dan NB
 **Model:**
 
 - `microsoft/mdeberta-v3-base`
-- Classification head: `Linear(384, 3)` — hidden size 384 sesuai arsitektur mDeBERTa-v3-base
+- Classification head: `Linear(784, 3)` — hidden size 784 sesuai arsitektur mDeBERTa-v3-base
 - 3-class output: A (simple/no retrieval), B (medium/single-shot), C (complex/multi-hop)
 
 **Training Data & Labeling Pipeline:**
@@ -246,9 +246,11 @@ data/wikipedia_id_corpus.jsonl      # retrieval corpus untuk NB07 (Δgap) dan NB
 **Class Imbalance & Weighted Loss:**
 
 - Class C berasal exclusively dari HotpotQA (~10.000); Class A dan B exclusively dari TyDiQA-ID → severe imbalance
-- **Wajib**: `CrossEntropyLoss(weight=class_weights)` dimana `w_i = total / (n_classes × n_i)`
-- Weights diterapkan di loss function, bukan di data sampling
-- Tanpa weighted loss, model akan collapse ke Class C
+- **Dua mekanisme digunakan secara bersamaan:**
+  - `WeightedRandomSampler` pada DataLoader — upsample Class A dan B selama training
+  - `CrossEntropyLoss(weight=class_weights)` dimana `w_i = total / (n_classes × n_i)` — penalti loss lebih besar untuk misclassifikasi kelas minoritas
+- Kombinasi keduanya terbukti efektif: Class B mencapai F1=0.712, Class A F1=0.819 pada validasi
+- Tanpa kedua mekanisme ini, model berisiko collapse ke Class C
 
 **Internal Train/Val Split:**
 
