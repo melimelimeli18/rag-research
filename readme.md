@@ -8,10 +8,13 @@ Note: the notebook is be run on the kaggle, because it have virtual GPU, for the
 
 1. NB01 - Data Preparation - https://www.kaggle.com/code/melisaolivia/01-data-prep
 2. NB02 - Complexity Classifier - https://www.kaggle.com/code/melisaolivia/02-complexity-classifier
+3. NB03 (a) - BM25 Index - https://www.kaggle.com/code/melisaolivia/03-a-bm25-index
+4. NB04 (b) - BGE-M3 Embedding - https://www.kaggle.com/code/melisaolivia/03-b-bge-m3-embedding
 
 ### Dataset
 
-1. crosslingual-rag-data - https://www.kaggle.com/datasets/melisaolivia/crosslingual-rag-data
+1. crosslingual-rag-data (NB01 output) - https://www.kaggle.com/datasets/melisaolivia/crosslingual-rag-data
+2. crosslingual-rag-indexes (NB03 output) - https://www.kaggle.com/datasets/melisaolivia/crosslingual-rag-indexes
 
 # Research Phase Track
 
